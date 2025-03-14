@@ -1,0 +1,43 @@
+{
+  "name": "fiyogql",
+  "version": "1.0.0",
+  "description": "A Unified GraphQL Server representing all microservices of Flexiyo.",
+  "keywords": [
+    "Flexiyo",
+    "GraphQL",
+    "fiyogql"
+  ],
+  "homepage": "https://github.com/flexiyo/fiyogql#readme",
+  "bugs": {
+    "url": "https://github.com/flexiyo/fiyogql/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexiyo/fiyogql.git"
+  },
+  "license": "ISC",
+  "author": "Kaushal Krishna",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "@graphql-tools/load-files": "^7.0.1",
+    "@graphql-tools/merge": "^9.0.22",
+    "@grpc/grpc-js": "^1.12.6",
+    "@grpc/proto-loader": "^0.7.13",
+    "apollo-server": "^3.13.0",
+    "axios": "^1.8.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "graphql": "^16.10.0",
+    "graphql-parse-resolve-info": "^4.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.9",
+    "postgres": "^3.4.5",
+    "uuid": "^11.1.0"
+  }
+}
