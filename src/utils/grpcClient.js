@@ -39,7 +39,7 @@ const downloadProtoFiles = async (serviceName, protoFiles) => {
 /**
  * Loads and initializes gRPC clients with TLS
  * @param {string} serviceName - The service folder
- * @param {string} serviceUrl - The gRPC service URL (e.g., `your-service.onrender.com`)
+ * @param {string} serviceUrl - The gRPC service URL
  * @param {string[]} protoFiles - List of proto filenames
  * @returns {object} - gRPC clients
  */
@@ -48,7 +48,7 @@ export const createGrpcClient = async (serviceName, serviceUrl, protoFiles) => {
 
   const clients = {};
 
-  const credentials = grpc.credentials.createInsecure();
+  const credentials = grpc.credentials.createSsl();
 
   for (const file of protoFiles) {
     if (file === "common.proto") continue;
