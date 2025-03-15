@@ -21,7 +21,7 @@ export function authenticateResolver(resolver, strict = true) {
 
       return resolver(
         parent,
-        { ...args, req_user_id: decoded.user_id, device_id: decoded.device_id },
+        { ...args, req_user_id: decoded.user_id },
         context,
         info
       );

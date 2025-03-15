@@ -48,7 +48,8 @@ export const createGrpcClient = async (serviceName, serviceUrl, protoFiles) => {
 
   const clients = {};
 
-  const credentials = grpc.credentials.createSsl();
+  // const credentials = grpc.credentials.createSsl();
+  const credentials = grpc.credentials.createInsecure();
 
   for (const file of protoFiles) {
     if (file === "common.proto") continue;
