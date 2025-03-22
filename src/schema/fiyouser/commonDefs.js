@@ -57,7 +57,8 @@ const commonDefs = gql`
   type Track {
     id: String!
     title: String!
-    artist: String!
+    artists: [String!]
+    link: String!
   }
 
   type Relation {

@@ -12,7 +12,7 @@ const commonDefs = gql`
 
   type ContentsResponse {
     status: Status!
-    contents: [Content!]!
+    contents: [Content!]
   }
 
   enum TableName {

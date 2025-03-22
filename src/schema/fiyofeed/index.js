@@ -5,7 +5,7 @@ import { feedDefs, feedResolvers } from "./feed.schema.js";
 
 const fiyofeedClient = await createGrpcClient(
   "fiyofeed",
-  process.env.FIYOFEED_SERVICE_URL || "localhost:8002",
+  "localhost:8002",
   ["common.proto", "feed.proto", "content.proto"]
 );
 

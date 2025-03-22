@@ -15,12 +15,14 @@ const resolvers = (fiyofeedClient) => {
 
   const handleRequest = (method) => {
     return authenticateResolver(async (_, args, __, ___) => {
+      console.log(args);
       const validationError = validatePayload(args);
       if (validationError) return GQLResponse.error(validationError);
 
       return new Promise((resolve, reject) => {
         method(args, (error, response) => {
           if (error) return reject(GQLResponse.error(error.message));
+          console.log(response);
           resolve(GQLResponse.success(response));
         });
       });
