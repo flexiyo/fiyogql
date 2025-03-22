@@ -13,20 +13,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    updateUser(updated_fields: UpdateUserInput!): UpdateUserOutput!
+    updateUser(updated_fields: UpdateUserInput!): UpdateUserResponse!
     deleteUser: StatusResponse!
-  }
-
-  type UpdateUserOutput {
-    full_name: String
-    username: String
-    account_type: AccountType
-    dob: String
-    gender: Gender
-    profession: String
-    bio: Bio
-    avatar: String
-    banner: String
   }
 
   input UpdateUserInput {
@@ -50,7 +38,25 @@ const typeDefs = gql`
   input TrackInput {
     id: String
     title: String
-    artist: String
+    artists: [String]
+    link: String
+  }
+
+  type UpdateUserResponse {
+    status: Status!
+    updated_fields: UpdateUserOutput!
+  }
+
+  type UpdateUserOutput {
+    full_name: String
+    username: String
+    account_type: AccountType
+    dob: String
+    gender: Gender
+    profession: String
+    bio: Bio
+    avatar: String
+    banner: String
   }
 `;
 
@@ -90,28 +96,7 @@ const resolvers = (fiyouserClient) => {
     },
 
     Mutation: {
-      updateUser: authenticateResolver(
-        async (_, { req_user_id, updated_fields }) => {
-          const validationError = validatePayload(updated_fields);
-          if (validationError) return GQLResponse.error(validationError);
-
-          return new Promise((resolve, reject) => {
-            user.UpdateUser(
-              { req_user_id, updated_fields: JSON.stringify(updated_fields) },
-              (error, response) => {
-                if (error) return reject(GQLResponse.error(error.message));
-                resolve(
-                  GQLResponse.success({
-                    ...response,
-                    ...JSON.parse(response.updated_fields),
-                  })
-                );
-              }
-            );
-          });
-        }
-      ),
-
+      updateUser: handleRequest(user.UpdateUser),
       deleteUser: handleRequest(user.DeleteUser),
     },
   };

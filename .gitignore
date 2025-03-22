@@ -6,7 +6,6 @@ yarn-error.log*
 
 # DIRS
 src/proto
-certs
 
 # Environment variables
 .env
@@ -39,3 +38,6 @@ coverage/
 # Apollo Server-specific
 apollo-cache/
 
+
+# windsurf rules
+.windsurfrules
