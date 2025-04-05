@@ -14,11 +14,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createContent(input: CreateContentRequest!): StatusResponse!
+    createContent(input: CreateContentRequest!): CreateContentResponse!
     updateContent(
       content_id: String!
-      table_name: TableName!
       updated_fields: UpdatedFieldsInput!
+      table_name: TableName!
     ): UpdateContentResponse!
     deleteContent(content_id: String!, table_name: TableName!): StatusResponse!
   }
@@ -32,9 +32,16 @@ const typeDefs = gql`
     table_name: TableName!
   }
 
+  type CreateContentResponse {
+    status: Status!
+    content_id: String!
+    table_name: TableName!
+  }
+
   type UpdateContentResponse {
     status: Status!
     updated_fields: UpdatedFieldsOutput!
+    table_name: TableName!
   }
 
   input UpdatedFieldsInput {
