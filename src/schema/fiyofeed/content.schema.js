@@ -6,8 +6,11 @@ import commonDefs from "./commonDefs.js";
 
 const typeDefs = gql`
   type Query {
-    getContent(table_name: TableName!): ContentResponse!
-    getUserContents(user_id: String!, table_name: TableName!): ContentsResponse!
+    getContent(content_id: String!, table_name: TableName!): ContentResponse!
+    getContents(
+      content_ids: [String!]!
+      table_name: TableName!
+    ): ContentsResponse!
   }
 
   type Mutation {
@@ -31,7 +34,7 @@ const typeDefs = gql`
 
   type UpdateContentResponse {
     status: Status!
-    updated_fields: UpdatedFields!
+    updated_fields: UpdatedFieldsOutput!
   }
 
   input UpdatedFieldsInput {
@@ -40,7 +43,7 @@ const typeDefs = gql`
     hashtags: [String!]
   }
 
-  type UpdatedFields {
+  type UpdatedFieldsOutput {
     collabs: [String!]
     caption: String
     hashtags: [String!]
@@ -67,7 +70,7 @@ const resolvers = (fiyofeedClient) => {
   return {
     Query: {
       getContent: handleRequest(content.GetContent),
-      getUserContents: handleRequest(content.GetUserContents),
+      getContents: handleRequest(content.GetContents),
     },
     Mutation: {
       createContent: handleRequest(content.CreateContent),

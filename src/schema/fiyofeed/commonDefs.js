@@ -29,7 +29,6 @@ const commonDefs = gql`
     id: String!
     creators: [User!]!
     media_key: String!
-    collabs: [String!]!
     created_at: String!
     caption: String!
     hashtags: [String!]!
