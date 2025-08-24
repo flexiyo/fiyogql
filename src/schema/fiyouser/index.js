@@ -20,3 +20,14 @@ export const fiyouserDefs = mergeTypeDefs(modules.map((mod) => mod.defs));
 export const fiyouserResolvers = mergeResolvers(
   modules.map((mod) => mod.resolvers(fiyouserClient))
 );
+
+export const fiyouserHealthCheck = async () => {
+  if (!fiyouserClient) throw new Error("gRPC client not ready");
+
+  return new Promise((resolve, reject) => {
+    fiyouserClient.auth.ping({}, (err, res) => {
+      if (err) return reject(err);
+      resolve(res);
+    });
+  });
+};

@@ -6,8 +6,9 @@ import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { expressMiddleware } from "@apollo/server/express4";
 import dotenv from "dotenv";
 
-import { serviceDefs, serviceResolvers } from "./schema/index.js";
 import { connectDB } from "./db/index.js";
+import { serviceDefs, serviceResolvers } from "./schema/index.js";
+import { fiyouserHealthCheck } from "./schema/fiyouser/index.js";
 
 const PORT = process.env.PORT || 8000;
 
@@ -55,7 +56,11 @@ const server = new ApolloServer({
     app.get("/", (_, res) =>
       res.json({ success: true, message: "fiyogql is online!" })
     );
-    app.get("/health", (_, res) => res.json({ success: true, message: "OK" }));
+    
+    app.get("/health", (_, res) => {
+      await fiyouserHealthCheck();
+      res.json({ success: true, message: "OK" });
+    });
 
     app.listen(PORT, () => {
       console.log(`🚀 GraphQL Server running on PORT: ${PORT}`);
